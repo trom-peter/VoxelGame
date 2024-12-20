@@ -20,15 +20,6 @@ struct Vertex {
 	Vertex(glm::vec3 position, glm::vec2 texCoord, glm::vec3 normal, float ao) : 
         position(position), texCoord(texCoord), normal(normal), ambientOcclusion(ao) {}
 
-    static std::vector<Vertex> getRectVertices() {
-        return {
-            Vertex(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0, 0), glm::vec3(0.0f, 0.0f, 1.0f), 3),         //normale ungetestet
-            Vertex(glm::vec3(1.0f, 0.0f, 0.0f), glm::vec2(1, 0), glm::vec3(0.0f, 0.0f, 1.0f), 3),         //normale ungetestet
-            Vertex(glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0, 1), glm::vec3(0.0f, 0.0f, 1.0f), 3),         //normale ungetestet
-            Vertex(glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(1, 1), glm::vec3(0.0f, 0.0f, 1.0f), 3),         //normale ungetestet
-        };
-    }
-
     static std::array<uint32_t, 6> getRectIndices() {
         return {
             0, 1, 2,
