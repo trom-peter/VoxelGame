@@ -1422,24 +1422,10 @@
     <None Include="libs\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="dependencies\SDL2-2.30.6\lib\x64\SDL2.dll" />
-    <None Include="dependencies\SDL2-2.30.6\lib\x86\SDL2.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\tex_atlas.png">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="dependencies\glew-2.1.0\lib\Release\Win32\glew32.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\Win32\glew32s.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\x64\glew32.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\x64\glew32s.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2main.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2test.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2main.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2test.lib" />
   </ItemGroup>
 </Project>

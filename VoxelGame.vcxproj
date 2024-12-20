@@ -466,8 +466,6 @@
     <ClCompile Include="source\world.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dependencies\SDL2-2.30.6\lib\x64\SDL2.dll" />
-    <None Include="dependencies\SDL2-2.30.6\lib\x86\SDL2.dll" />
     <None Include="libs\glm\detail\func_common.inl" />
     <None Include="libs\glm\detail\func_common_simd.inl" />
     <None Include="libs\glm\detail\func_exponential.inl" />
@@ -611,18 +609,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\tex_atlas.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="dependencies\glew-2.1.0\lib\Release\Win32\glew32.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\Win32\glew32s.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\x64\glew32.lib" />
-    <Library Include="dependencies\glew-2.1.0\lib\Release\x64\glew32s.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2main.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x64\SDL2test.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2main.lib" />
-    <Library Include="dependencies\SDL2-2.30.6\lib\x86\SDL2test.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
