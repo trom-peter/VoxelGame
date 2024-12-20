@@ -131,6 +131,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /F "$(SolutionDir)dependencies/SDL2-2.30.6/lib/x64/SDL2.dll" "$(TargetDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\block.h" />
