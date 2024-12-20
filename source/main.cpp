@@ -126,7 +126,6 @@ int main(int argc, char** argv) {
             }            
             //generate meshes and render chunks from cache that are in render distance - 1
             if (kv.second->isInDistance(currentChunk.x, currentChunk.y, world->getRenderDistance() - 1)) {
-                //std::cout << "render chunk: " << chunk->getPosition().x << ", " << chunk->getPosition().y << std::endl;
                 if (kv.second->getMesh() == nullptr) {
                     kv.second->generateMesh(shader, vao);
                 }

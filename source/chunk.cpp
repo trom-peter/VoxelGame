@@ -14,7 +14,7 @@ Chunk::~Chunk() {
 }
 
 BlockType Chunk::getBlock(int x, int y, int z) {
-    float scale = 0.04f;  // Skalierungsfaktor der noisemap
+    float scale = 0.04f;  // skalierungsfaktor der noisemap
     int baseHeight = 50; // base höhe
     int amplitude = 50;  // maximaler unterschied zur base höhe
 
