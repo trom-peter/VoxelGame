@@ -13,4 +13,4 @@ In the current state of this game, it can only be run on Visual Studio, as it is
 
 ## Know Issues
 - When running the game in debug configuration, loading a new chunk will cause a crash.
-- Far away block can sometimes flicker when moving towards them.
+- Far away blocks can sometimes flicker when moving towards them.
