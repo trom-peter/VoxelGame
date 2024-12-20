@@ -452,7 +452,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="libs\glm\detail\glm.cpp" />
-    <ClCompile Include="libs\glm\glm.cppm" />
     <ClCompile Include="source\block.cpp" />
     <ClCompile Include="source\camera.cpp" />
     <ClCompile Include="source\camera_controller.cpp" />
