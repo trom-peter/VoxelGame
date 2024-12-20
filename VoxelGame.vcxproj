@@ -155,7 +155,6 @@
     <ClInclude Include="include\input_handler.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\pair_hash.h" />
-    <ClInclude Include="include\plane.h" />
     <ClInclude Include="include\renderer.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\texture_atlas.h" />

@@ -45,9 +45,6 @@
     <ClInclude Include="include\pair_hash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\plane.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
