@@ -33,9 +33,6 @@
     <ClInclude Include="include\fps_camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Frustum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\index_buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

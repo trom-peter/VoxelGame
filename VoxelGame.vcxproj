@@ -151,7 +151,6 @@
     <ClInclude Include="include\chunk.h" />
     <ClInclude Include="include\floating_camera.h" />
     <ClInclude Include="include\fps_camera.h" />
-    <ClInclude Include="include\Frustum.h" />
     <ClInclude Include="include\index_buffer.h" />
     <ClInclude Include="include\input_handler.h" />
     <ClInclude Include="include\mesh.h" />
