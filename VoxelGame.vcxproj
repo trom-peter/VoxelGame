@@ -74,6 +74,10 @@
     <IncludePath>$(SolutionDir)dependencies\SDL2-2.30.6\include;$(SolutionDir)dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\SDL2-2.30.6\lib\x64;$(SolutionDir)dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)dependencies\SDL2-2.30.6\include;$(SolutionDir)dependencies\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\SDL2-2.30.6\lib\x64;$(SolutionDir)dependencies\glew-2.1.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -114,6 +118,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /F "$(SolutionDir)dependencies/SDL2-2.30.6/lib/x64/SDL2.dll" "$(TargetDir)"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
