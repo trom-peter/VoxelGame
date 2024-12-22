@@ -15,16 +15,16 @@ uniform int u_atlasWidth;
 uniform int u_atlasHeight;
 uniform int u_tileWidth;
 uniform int u_tileHeight;
+uniform float u_near;
+uniform float u_far;
+uniform vec3 u_skyColor;
 
-vec3 skyColor = vec3(0.8f, 0.8f, 1.0f);
-float near = 0.1f;
-float far = 1000.0f;
 float fogStart = 20.0;              // Startdistanz des Nebels
-float fogEnd = 150.0;                // Enddistanz des Nebels
+float fogEnd = u_far;                // Enddistanz des Nebels
 
 float linearizeDepth(float depth) 
 {
-	return (2.0 * near * far) / (far + near - (depth * 2.0 - 1.0) * (far - near));
+	return (2.0 * u_near * u_far) / (u_far + u_near - (depth * 2.0 - 1.0) * (u_far - u_near));
 }
 
 void main()
@@ -38,5 +38,5 @@ void main()
 	float depth = linearizeDepth(gl_FragCoord.z);
 	float fogFactor = clamp((fogEnd - depth) / (fogEnd - fogStart), 0.0, 1.0);
 
-	f_color = vec4(mix(skyColor, finalColor, fogFactor), 1.0); //KOMISCHE ARTEFAKTE NUR BEI DEN TEXTUREN HIER. VIELLEICHT AUCH NICHT OHNE LICHT!
+	f_color = vec4(mix(u_skyColor, finalColor, fogFactor), 1.0); 
 }
