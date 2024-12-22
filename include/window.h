@@ -21,9 +21,9 @@ public:
 
     void updateTime();
 
-    float getWidth();
+    int getWidth();
 
-    float getHeight();
+    int getHeight();
 
     float getDelta();
 
