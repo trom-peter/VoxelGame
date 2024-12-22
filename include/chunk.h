@@ -2,7 +2,6 @@
 #include "block.h"
 #include "vertex.h"
 #include "mesh.h"
-#include "plane.h"
 #include "pair_hash.h"
 #include "world.h"
 
