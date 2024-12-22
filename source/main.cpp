@@ -36,6 +36,9 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    float farPlane = 300.0f;
+    float nearPlane = 0.8f;
+
     World* world = new World(15, glm::vec3(0.8f, 0.8f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
     renderer.setClearColor(world->getSkyColor().x, world->getSkyColor().y, world->getSkyColor().z);
@@ -62,7 +65,7 @@ int main(int argc, char** argv) {
 
     glm::mat4 model = glm::mat4(1.0f);
 
-    FloatingCamera camera(90.0f, window.getWidth(), window.getHeight(), 20.0f, 0.1f);
+    FloatingCamera camera(90.0f, window.getWidth(), window.getHeight(), 20.0f, 0.1f, nearPlane, farPlane);
     camera.translate(glm::vec3(0, 60, 0));
     camera.update();
     CameraController cameraController(camera);
@@ -80,6 +83,10 @@ int main(int argc, char** argv) {
     shader.setUniform3fv("u_sunColor", 1, world->getSunColor());
     shader.setUniform1i("u_chunkWidth", Chunk::CHUNK_WIDTH);
     shader.setUniform1i("u_chunkLength", Chunk::CHUNK_LENGTH);
+    shader.setUniform1f("u_near", nearPlane);
+    shader.setUniform1f("u_far", farPlane);
+    shader.setUniform3fv("u_skyColor", 1, world->getSkyColor());
+
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     bool running = true;

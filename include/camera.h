@@ -6,7 +6,7 @@
 class Camera {
 public:
 
-	Camera(float fov, float width, float height);
+	Camera(float fov, float width, float height, float nearPlane, float farPlane);
 
 	glm::mat4 getViewProj();
 

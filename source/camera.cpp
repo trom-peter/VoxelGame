@@ -1,8 +1,8 @@
 #include "camera.h"
 #include <iostream>
 
-Camera::Camera(float fov, float width, float height) {
-		projection = glm::perspective(fov / 2.0f, width / height, 0.1f, 1000.0f);
+Camera::Camera(float fov, float width, float height, float nearPlane, float farPlane) {
+		projection = glm::perspective(fov / 2.0f, width / height, nearPlane, farPlane);
 		view = glm::mat4(1.0f);
 		position = glm::vec3(0.0f);
 		update();

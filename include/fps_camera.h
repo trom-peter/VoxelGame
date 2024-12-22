@@ -3,7 +3,7 @@
 
 class FPSCamera : public Camera {
 public:
-	FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity);
+	FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity, float nearPlane, float farPlane);
 
 	void onMouseMoved(float xRel, float yRel);
 
