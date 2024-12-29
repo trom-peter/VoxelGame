@@ -9,7 +9,7 @@ public:
 	~VertexArray();
 
 	void addVertexBuffer(VertexBuffer& vb);
-	void setLayout(VertexBufferLayout* layout);
+	void setupVertexLayout();
 	void bind();
 	void unbind();
 
