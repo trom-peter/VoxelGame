@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -146,15 +146,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\block.h" />
+    <ClInclude Include="include\box_collision.h" />
     <ClInclude Include="include\camera.h" />
-    <ClInclude Include="include\camera_controller.h" />
+    <ClInclude Include="include\floating_camera_controller.h" />
     <ClInclude Include="include\chunk.h" />
     <ClInclude Include="include\floating_camera.h" />
     <ClInclude Include="include\fps_camera.h" />
+    <ClInclude Include="include\seed_generator.h" />
+    <ClInclude Include="include\voxel_game.h" />
     <ClInclude Include="include\index_buffer.h" />
     <ClInclude Include="include\input_handler.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\pair_hash.h" />
+    <ClInclude Include="include\player.h" />
+    <ClInclude Include="include\fps_camera_controller.h" />
     <ClInclude Include="include\renderer.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\texture_atlas.h" />
@@ -457,18 +462,22 @@
     <ClInclude Include="libs\stb_perlin.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\fps_camera_controller.cpp" />
     <ClCompile Include="libs\glm\detail\glm.cpp" />
     <ClCompile Include="source\block.cpp" />
     <ClCompile Include="source\camera.cpp" />
-    <ClCompile Include="source\camera_controller.cpp" />
+    <ClCompile Include="source\floating_camera_controller.cpp" />
     <ClCompile Include="source\chunk.cpp" />
     <ClCompile Include="source\floating_camera.cpp" />
     <ClCompile Include="source\fps_camera.cpp" />
+    <ClCompile Include="source\voxel_game.cpp" />
     <ClCompile Include="source\input_handler.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\mesh.cpp" />
+    <ClCompile Include="source\player.cpp" />
     <ClCompile Include="source\renderer.cpp" />
     <ClCompile Include="source\shader.cpp" />
+    <ClCompile Include="source\texture_atlas.cpp" />
     <ClCompile Include="source\texure_loader.cpp" />
     <ClCompile Include="source\vertex_array.cpp" />
     <ClCompile Include="source\window.cpp" />

@@ -21,7 +21,7 @@
     <ClInclude Include="include\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\camera_controller.h">
+    <ClInclude Include="include\floating_camera_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\chunk.h">
@@ -945,6 +945,21 @@
     <ClInclude Include="libs\stb_perlin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fps_camera_controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\box_collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\voxel_game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\seed_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\block.cpp">
@@ -953,7 +968,7 @@
     <ClCompile Include="source\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\camera_controller.cpp">
+    <ClCompile Include="source\floating_camera_controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\chunk.cpp">
@@ -993,6 +1008,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libs\glm\detail\glm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fps_camera_controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\texture_atlas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\voxel_game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
