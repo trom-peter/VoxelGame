@@ -12,5 +12,4 @@ In this version, you are able to explore and fly through a procedurally generate
 ![example](https://github.com/user-attachments/assets/03816e82-421e-44aa-9d9d-757b9b526d3f)
 
 ## Know Issues
-- When running the game in debug configuration, loading a new chunk will cause a crash.
 - Far away blocks can sometimes flicker when moving towards them.
