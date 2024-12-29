@@ -2,7 +2,10 @@
 #define SDL_MAIN_HANDLED
 //#define SHOW_FPS
 
-Window::Window(int width, int height, const char* title) : w(width), h(height), active(true), window(nullptr), glContext(nullptr) {}
+Window::Window(int width, int height, const char* title) : title(title), active(true), window(nullptr), glContext(nullptr) {
+    this->width = width;
+    this->height = height;
+}
 
 bool Window::init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -13,7 +16,7 @@ bool Window::init() {
     setupOpenGLAttributes();
 
     uint32_t flags = SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP;
-    window = SDL_CreateWindow("MINECRAFT", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, flags);
+    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
     if (!window) {
         std::cout << "Failed to create window: " << SDL_GetError() << std::endl;
         return false;
@@ -69,10 +72,6 @@ void Window::setupTimeCount() {
     FPS = 0;
 }
 
-void Window::increaseTime() {
-    time += delta;
-}
-
 void Window::updateTime() {
     uint64_t endCounter = SDL_GetPerformanceCounter();
     uint64_t counterElapsed = SDL_GetPerformanceCounter() - lastCounter;
@@ -82,11 +81,12 @@ void Window::updateTime() {
     std::cout << FPS << std::endl;
 #endif
     lastCounter = endCounter;
+    time += delta;
 }
 
-void Window::handleInputs(InputHandler& ih) {
-    if (ih.isKeyPressed(SDL_SCANCODE_ESCAPE) && active) setActive(false);
-    if (ih.isButtonPressed(SDL_BUTTON_LEFT) && !active) setActive(true);
+void Window::handleInputs(InputHandler* ih) {
+    if (ih->isKeyPressed(SDL_SCANCODE_ESCAPE) && active) setActive(false);
+    if (ih->isButtonPressed(SDL_BUTTON_LEFT) && !active) setActive(true);
 }
 
 void Window::setActive(bool active) {
@@ -95,11 +95,11 @@ void Window::setActive(bool active) {
 }
 
 int Window::getWidth() {
-    return w;
+    return width;
 }
 
 int Window::getHeight() {
-    return h;
+    return height;
 }
 
 float Window::getDelta() {

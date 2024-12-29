@@ -17,8 +17,6 @@ public:
 
     void quit();
 
-    void increaseTime();
-
     void updateTime();
 
     int getWidth();
@@ -31,13 +29,14 @@ public:
 
     bool isActive();
 
-    void handleInputs(InputHandler& ih);
+    void handleInputs(InputHandler* ih);
 
 private:
     void setupOpenGLAttributes();
     void setupTimeCount();
 
-    int w, h;
+    const char* title;
+    int width, height;
     bool active; //is this window being used
     SDL_Window* window;
     SDL_GLContext glContext;
