@@ -21,7 +21,7 @@ BlockType Chunk::getBlock(int x, int y, int z) {
     int worldX = x + position.x * CHUNK_WIDTH;
     int worldY = z + position.y * CHUNK_LENGTH;
 
-    float noiseValue = stb_perlin_noise3(worldX * scale, worldY * scale, 0, 0, 0, 0);
+    float noiseValue = stb_perlin_noise3_seed(worldX * scale, worldY * scale, 0, 0, 0, 0, world.getSeed());
 
     int groundHeight = baseHeight + static_cast<int>(noiseValue * amplitude);
 
@@ -35,13 +35,13 @@ void Chunk::generateChunk() {
     for (unsigned short x = 0; x < CHUNK_WIDTH; x++) {
 		for (unsigned short y = 0; y < CHUNK_HEIGHT; y++) {
 			for (unsigned short z = 0; z < CHUNK_LENGTH; z++) {
-				blocks[x][y][z] = getBlock(x, y, z);
-			}
+                blocks[x][y][z] = Block(getBlock(x, y, z));
+            }
 		}
 	}
 }
 
-void Chunk::generateMesh(Shader& shader, VertexArray& vao) {
+void Chunk::generateMesh(Shader* shader, VertexArray* vao) {
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
     for (unsigned short x = 0; x < CHUNK_WIDTH; x++) {
@@ -104,7 +104,7 @@ void Chunk::generateMesh(Shader& shader, VertexArray& vao) {
             }
         }
     }
-    this->mesh = new Mesh(vertices, vertices.size(), indices, indices.size(), &shader, &vao);
+    this->mesh = new Mesh(vertices, vertices.size(), indices, indices.size(), shader, vao);
 }
 
 void Chunk::addFace(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, glm::vec3 position, FaceDirection dir) {
@@ -124,103 +124,103 @@ void Chunk::addFace(std::vector<Vertex>& vertices, std::vector<uint32_t>& indice
         case FaceDirection::FRONT:
             normal = glm::vec3(0.0f, 0.0f, 1.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(-0.5f, -0.5f, 0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(0.0f, 0.0f, 1.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y, z + 1), !isAirAt(x, y - 1, z + 1), !isAirAt(x - 1, y - 1, z + 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(0.5f, -0.5f, 0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[1] = Vertex(glm::vec3(1.0f, 0.0f, 1.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y, z + 1), !isAirAt(x, y - 1, z + 1), !isAirAt(x + 1, y - 1, z + 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(0.5f, 0.5f, 0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(1.0f, 1.0f, 1.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y, z + 1), !isAirAt(x, y + 1, z + 1), !isAirAt(x + 1, y + 1, z + 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(-0.5f, 0.5f, 0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[3] = Vertex(glm::vec3(0.0f, 1.0f, 1.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y, z + 1), !isAirAt(x, y + 1, z + 1), !isAirAt(x - 1, y + 1, z + 1)));
             break;
 
         case FaceDirection::BACK:
             normal = glm::vec3(0.0f, 0.0f, -1.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(-0.5f, -0.5f, -0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(0.0f, 0.0f, 0.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y, z - 1), !isAirAt(x, y - 1, z - 1), !isAirAt(x - 1, y - 1, z - 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(-0.5f, 0.5f, -0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[1] = Vertex(glm::vec3(0.0f, 1.0f, 0.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y, z - 1), !isAirAt(x, y + 1, z - 1), !isAirAt(x - 1, y + 1, z - 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(0.5f, 0.5f, -0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(1.0f, 1.0f, 0.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y, z - 1), !isAirAt(x, y + 1, z - 1), !isAirAt(x + 1, y + 1, z - 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(0.5f, -0.5f, -0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[3] = Vertex(glm::vec3(1.0f, 0.0f, 0.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y, z - 1), !isAirAt(x, y - 1, z - 1), !isAirAt(x + 1, y - 1, z - 1)));
             break;
 
         case FaceDirection::LEFT:
             normal = glm::vec3(-1.0f, 0.0f, 0.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(-0.5f, -0.5f, 0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(0.0f, 0.0f, 1.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y - 1, z), !isAirAt(x - 1, y, z + 1), !isAirAt(x - 1, y - 1, z + 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(-0.5f, 0.5f, 0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[1] = Vertex(glm::vec3(0.0f, 1.0f, 1.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y + 1, z), !isAirAt(x - 1, y, z + 1), !isAirAt(x - 1, y + 1, z + 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(-0.5f, 0.5f, -0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(0.0f, 1.0f, 0.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y + 1, z), !isAirAt(x - 1, y, z - 1), !isAirAt(x - 1, y + 1, z - 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(-0.5f, -0.5f, -0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[3] = Vertex(glm::vec3(0.0f, 0.0f, 0.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y - 1, z), !isAirAt(x - 1, y, z - 1), !isAirAt(x - 1, y - 1, z - 1)));
             break;
 
         case FaceDirection::RIGHT:
             normal = glm::vec3(1.0f, 0.0f, 0.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(0.5f, -0.5f, -0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(1.0f, 0.0f, 0.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y - 1, z), !isAirAt(x + 1, y, z - 1), !isAirAt(x + 1, y - 1, z - 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(0.5f, 0.5f, -0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[1] = Vertex(glm::vec3(1.0f, 1.0f, 0.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y + 1, z), !isAirAt(x + 1, y, z - 1), !isAirAt(x + 1, y + 1, z - 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(0.5f, 0.5f, 0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(1.0f, 1.0f, 1.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y + 1, z), !isAirAt(x + 1, y, z + 1), !isAirAt(x + 1, y + 1, z + 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(0.5f, -0.5f, 0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[3] = Vertex(glm::vec3(1.0f, 0.0f, 1.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y - 1, z), !isAirAt(x + 1, y, z + 1), !isAirAt(x + 1, y - 1, z + 1)));
             break;
 
         case FaceDirection::TOP:
             normal = glm::vec3(0.0f, 1.0f, 0.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(-0.5f, 0.5f, -0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(0.0f, 1.0f, 0.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y + 1, z), !isAirAt(x, y + 1, z - 1), !isAirAt(x - 1, y + 1, z - 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(-0.5f, 0.5f, 0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[1] = Vertex(glm::vec3(0.0f, 1.0f, 1.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y + 1, z), !isAirAt(x, y + 1, z + 1), !isAirAt(x - 1, y + 1, z + 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(0.5f, 0.5f, 0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(1.0f, 1.0f, 1.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y + 1, z), !isAirAt(x, y + 1, z + 1), !isAirAt(x + 1, y + 1, z + 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(0.5f, 0.5f, -0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[3] = Vertex(glm::vec3(1.0f, 1.0f, 0.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y + 1, z), !isAirAt(x, y + 1, z - 1), !isAirAt(x + 1, y + 1, z - 1)));
             break;
 
         case FaceDirection::BOTTOM:
             normal = glm::vec3(0.0f, -1.0f, 0.0f);
 
-            faceVertices[0] = Vertex(glm::vec3(0.5f, -0.5f, -0.5f) + position, glm::ivec2(1, 0), normal, 
+            faceVertices[0] = Vertex(glm::vec3(1.0f, 0.0f, 0.0f) + position, glm::ivec2(1, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y - 1, z), !isAirAt(x, y - 1, z - 1), !isAirAt(x + 1, y - 1, z - 1)));
 
-            faceVertices[1] = Vertex(glm::vec3(0.5f, -0.5f, 0.5f) + position, glm::ivec2(1, 1), normal, 
+            faceVertices[1] = Vertex(glm::vec3(1.0f, 0.0f, 1.0f) + position, glm::ivec2(1, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x + 1, y - 1, z), !isAirAt(x, y - 1, z + 1), !isAirAt(x + 1, y - 1, z + 1)));
 
-            faceVertices[2] = Vertex(glm::vec3(-0.5f, -0.5f, 0.5f) + position, glm::ivec2(0, 1), normal, 
+            faceVertices[2] = Vertex(glm::vec3(0.0f, 0.0f, 1.0f) + position, glm::ivec2(0, 1), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y - 1, z), !isAirAt(x, y - 1, z + 1), !isAirAt(x - 1, y - 1, z + 1)));
 
-            faceVertices[3] = Vertex(glm::vec3(-0.5f, -0.5f, -0.5f) + position, glm::ivec2(0, 0), normal, 
+            faceVertices[3] = Vertex(glm::vec3(0.0f, 0.0f, 0.0f) + position, glm::ivec2(0, 0), normal, 
                 Vertex::calcVertexAO(!isAirAt(x - 1, y - 1, z), !isAirAt(x, y - 1, z - 1), !isAirAt(x - 1, y - 1, z - 1)));
             break;
     }
 
     // add vertices with correct texture id in atlas
     for (Vertex& vertex : faceVertices) {
-        vertex.texId = Block::indexOf(blocks[position.x][position.y][position.z], dir);
+        vertex.texId = Block::indexOf(blocks[position.x][position.y][position.z].type, dir);
         vertices.push_back(vertex);
     }
 
@@ -253,11 +253,7 @@ bool Chunk::isAirAt(int x, int y, int z) {
     if (z == -1)                      return (*world.getChunks())[{position.x, position.y - 1}]->isAirAt(x, y, CHUNK_SIZE - 1);
     if (z == CHUNK_SIZE)              return (*world.getChunks())[{position.x, position.y + 1}]->isAirAt(x, y, 0);
 
-    return blocks[x][y][z] == BlockType::BLOCK_AIR;
-}
-
-bool Chunk::isChunkAt(int x, int y) {
-    return world.getChunks()->count({x, y}) == 1; //KÖNNTE CHUNK ODER NULL RETURNEN?
+    return blocks[x][y][z].type == BlockType::BLOCK_AIR;
 }
 
 bool Chunk::isInDistance(int posX, int posY, unsigned short distance) {

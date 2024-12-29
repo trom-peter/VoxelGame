@@ -13,9 +13,10 @@ enum class BlockType : std::uint8_t {
 };
 
 struct Block {
-    Block(glm::vec3 pos, BlockType type);
+    Block(BlockType type);
+    Block();
 
-    glm::vec3 position;
+    BlockType type;
 
     static std::unordered_map<BlockType, std::unordered_map<FaceDirection, glm::vec2>> blockIndices;
 

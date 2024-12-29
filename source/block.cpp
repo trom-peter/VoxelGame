@@ -34,7 +34,9 @@ std::unordered_map<BlockType, std::unordered_map<FaceDirection, glm::vec2>> Bloc
     }
 };
 
-Block::Block(glm::vec3 pos, BlockType type): position(pos) {}
+Block::Block(BlockType type) : type(type) {}
+
+Block::Block(){}
 
 glm::vec2 Block::indexOf(BlockType type, FaceDirection dir) {
     return blockIndices[type][dir];

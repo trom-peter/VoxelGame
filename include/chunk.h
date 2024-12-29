@@ -15,25 +15,24 @@ public:
 	Chunk(glm::ivec2 position, World& world);
 	~Chunk();
 
-	static glm::ivec2 toChunkPosition(glm::vec3 worldPosition);
-	bool isChunkAt(int x, int y);
-
-	void generateChunk();
-	void generateMesh(Shader& shader, VertexArray& vao);
-	bool isInDistance(int posX, int posY, unsigned short distance);
-	glm::ivec2 getPosition();
-	Mesh* getMesh();
-
 	static const unsigned short CHUNK_SIZE = 16;
 	static const unsigned short CHUNK_HEIGHT = 100;
 	static const unsigned short CHUNK_WIDTH = CHUNK_SIZE;
 	static const unsigned short CHUNK_LENGTH = CHUNK_SIZE;
 
+	static glm::ivec2 toChunkPosition(glm::vec3 worldPosition);
+
+	void generateChunk();
+	void generateMesh(Shader* shader, VertexArray* vao);
+	bool isInDistance(int posX, int posY, unsigned short distance);
+	glm::ivec2 getPosition();
+	Mesh* getMesh();
+
 private:
 	void addFace(std::vector<Vertex>& vertices, std::vector<uint32_t>& indices, glm::vec3 position, FaceDirection dir);
 	BlockType getBlock(int x, int y, int z);
 	bool isAirAt(int x, int y, int z);
-	std::array<std::array<std::array<BlockType, CHUNK_WIDTH>, CHUNK_HEIGHT>, CHUNK_LENGTH> blocks{{{BlockType::BLOCK_AIR}}};
+	std::array<std::array<std::array<Block, CHUNK_WIDTH>, CHUNK_HEIGHT>, CHUNK_LENGTH> blocks;
 
 	World& world;
 	Mesh* mesh = nullptr;
