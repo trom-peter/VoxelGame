@@ -7,6 +7,13 @@
 #include "shader.h"
 #include "index_buffer.h"
 #include "chunk.h"
+#include "texture_atlas.h"
+#include "texture_loader.h"
+#include "camera.h"
+
+class Camera;
+struct TextureAtlas;
+class World;
 class Chunk;
 class VertexArray;
 struct Shader;
@@ -21,6 +28,12 @@ public:
 
     bool init();
 
+    void setupTextureAtlas(Shader* shader);
+
+    void setupUniforms(Shader* shader, World* world);
+
+    void updateUniforms(Shader* shader, World* world, Camera* camera);
+
     void draw(Chunk* chunk);
 
     void clear();
@@ -32,5 +45,6 @@ public:
     static float NEAR;
     static float FAR;
 private:
+    TextureAtlas* atlas;
     void setupGLDebugCallback();
 };

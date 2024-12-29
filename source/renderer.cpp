@@ -46,6 +46,39 @@ void Renderer::draw(Chunk* chunk) {
     mesh->vao->unbind();
 }
 
+void Renderer::setupTextureAtlas(Shader* shader) {
+    atlas = new TextureAtlas("Textures/tex_atlas.png", 256, 256, 16, 16);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, atlas->id);
+}
+
+void Renderer::setupUniforms(Shader* shader, World* world) {
+    shader->setUniform1i("u_texture_atlas", 0);
+    shader->setUniform1i("u_atlasWidth", atlas->atlasWidth);
+    shader->setUniform1i("u_atlasHeight", atlas->atlasHeight);
+    shader->setUniform1i("u_tileWidth", atlas->tileWidth);
+    shader->setUniform1i("u_tileHeight", atlas->tileHeight);
+
+    shader->setUniform3fv("u_sunColor", 1, world->getSunColor());
+    shader->setUniform1i("u_chunkWidth", Chunk::CHUNK_WIDTH);
+    shader->setUniform1i("u_chunkLength", Chunk::CHUNK_LENGTH);
+    shader->setUniform1f("u_near", Renderer::NEAR);
+    shader->setUniform1f("u_far", Renderer::FAR);
+    shader->setUniform3fv("u_skyColor", 1, world->getSkyColor());
+}
+
+void Renderer::updateUniforms(Shader* shader, World* world, Camera* camera) {
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 modelViewProj = camera->getViewProj() * model;
+    glm::mat4 modelView = camera->getView() * model;
+    glm::mat4 invModelView = glm::transpose(glm::inverse(modelView));
+    glm::vec4 transformedSunDirection = glm::transpose(glm::inverse(camera->getView())) * glm::vec4(world->getSunDirection(), 1.0f);
+
+    shader->setUniformMatrix4fv("u_modelViewProj", 1, GL_FALSE, modelViewProj);
+    shader->setUniform3fv("u_sunDirection", 1, transformedSunDirection);
+    shader->setUniformMatrix4fv("u_invModelView", 1, GL_FALSE, invModelView);
+}
+
 void Renderer::drawInstanced(VertexArray& vao, IndexBuffer& ib, Shader& shader, int numInstances) {
     shader.bind();
     vao.bind();
