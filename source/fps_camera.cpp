@@ -1,8 +1,8 @@
 #include <iostream>
 #include "fps_camera.h"
 
-FPSCamera::FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity, float nearPlane, float farPlane) : 
-	speed(speed), mouseSensitivity(mouseSensitivity),  Camera(fov, width, height, nearPlane, farPlane) 
+FPSCamera::FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity) : 
+	speed(speed), mouseSensitivity(mouseSensitivity),  Camera(fov, width, height) 
 {
 	up = glm::vec3(0.0f, 1.0f, 0.0f);
 	yaw = -90.0f;

@@ -1,9 +1,11 @@
+#pragma once
+
 #include "camera.h"
 #include "glm/ext/matrix_transform.hpp"
 
 class FPSCamera : public Camera {
 public:
-	FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity, float nearPlane, float farPlane);
+	FPSCamera(float fov, float width, float height, float speed, float mouseSensitivity);
 
 	void onMouseMoved(float xRel, float yRel);
 

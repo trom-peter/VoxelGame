@@ -4,7 +4,12 @@ void GLAPIENTRY openGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenu
     std::cout << "[OpenGL Error " << id << "] " << message << std::endl;
 }
 
-Renderer::Renderer() {}
+float Renderer::NEAR;
+float Renderer::FAR;
+Renderer::Renderer(float nearPlane, float farPlane) {
+    Renderer::NEAR = nearPlane;
+    Renderer::FAR = farPlane;
+}
 
 bool Renderer::init() {
     GLenum err = glewInit();
