@@ -9,7 +9,7 @@ class Chunk;
 class World {
 
 public:
-	World(unsigned short renderDistance, glm::vec3 skyColor, glm::vec3 sunColor, glm::vec3 sunDirection);
+	World(unsigned short renderDistance, glm::vec3 skyColor, glm::vec3 sunColor, glm::vec3 sunDirection, int seed);
 	~World();
 
 	unsigned short getRenderDistance();
@@ -17,8 +17,10 @@ public:
 	glm::vec3 getSunColor();
 	glm::vec3 getSunDirection();
 	std::unordered_map<std::pair<int, int>, std::unique_ptr<Chunk>, pair_hash>* getChunks();
+	int getSeed();
 
 private:
+	int seed;
 	std::unordered_map<std::pair<int, int>, std::unique_ptr<Chunk>, pair_hash> chunks;
 	unsigned short renderDistance;
 	glm::vec3 skyColor;

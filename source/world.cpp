@@ -1,7 +1,15 @@
 #include "world.h"
+#include <random>
+#include <limits>
 
-World::World(unsigned short renderDistance, glm::vec3 skyColor, glm::vec3 sunColor, glm::vec3 sunDirection) : 
-	renderDistance(renderDistance), skyColor(skyColor), sunColor(sunColor), sunDirection(sunDirection) {}
+World::World(unsigned short renderDistance, glm::vec3 skyColor, glm::vec3 sunColor, glm::vec3 sunDirection, int seed) : 
+	renderDistance(renderDistance), skyColor(skyColor), sunColor(sunColor), sunDirection(sunDirection), seed(seed) {}
+
+World::~World() {}
+
+int World::getSeed() {
+	return seed;
+}
 
 unsigned short World::getRenderDistance() {
 	return renderDistance;
