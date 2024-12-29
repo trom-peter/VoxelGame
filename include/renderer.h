@@ -17,7 +17,7 @@ void GLAPIENTRY openGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenu
 class Renderer {
 
 public:
-    Renderer();
+    Renderer(float nearPlane, float farPlane);
 
     bool init();
 
@@ -28,6 +28,9 @@ public:
     void drawInstanced(VertexArray& vao, IndexBuffer& ib, Shader& shader, int numInstances);
 
     void setClearColor(GLclampf r, GLclampf g, GLclampf b);
+
+    static float NEAR;
+    static float FAR;
 private:
     void setupGLDebugCallback();
 };
