@@ -11,5 +11,5 @@ In this version, you are able to explore and fly through a procedurally generate
 ## How it looks
 ![example](https://github.com/user-attachments/assets/03816e82-421e-44aa-9d9d-757b9b526d3f)
 
-## Know Issues
+## Known Issues
 - Far away blocks can sometimes flicker when moving towards them.
